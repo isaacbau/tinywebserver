@@ -21,13 +21,11 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
         
     - uses: actions/checkout@v4
+    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag tinywebserver:dev
+      run: docker build -t registry.isaacbs.com/tinywebserver:dev .
       
-    - name: Docker tag images
-      run: docker tag tinywebserver:dev registry.isaacbs.com/tinywebserver:dev
-      
-    - name: Push Gateway image
+    - name: Push Docker image
       run: docker push registry.isaacbs.com/tinywebserver:dev
       
     - name: Trigger Portainer Webhook
